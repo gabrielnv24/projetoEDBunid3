@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int TABLE_SIZE = 100; 
+
 struct Node {
     string palavra;
     int ocorrencias;
@@ -12,22 +14,22 @@ struct Node {
     Node(string p) : palavra(p), ocorrencias(1), next(nullptr) {}
 };
 
+// Função hash 
+int hashFunction(const string& word) {
+    int hash = 0; 
+    for (char c : word) {
+        hash += static_cast<int>(c); // Soma o valor ASCII de cada caractere
+    }
+    return hash % TABLE_SIZE; // Aplica o módulo para garantir que o índice esteja dentro dos limites da tabela
+}
+
 class HashTable {
 private:
     vector<Node*> tabela;
-    int tamanho;
-
-    int hashFunction(const string& palavra) {
-        unsigned long hash = 5381;
-        for (char c : palavra) {
-            hash = ((hash << 5) + hash) + c;  
-        }
-        return hash % tamanho;
-    }
 
 public:
-    HashTable(int tam) : tamanho(tam) {
-        tabela.resize(tamanho, nullptr);
+    HashTable() {
+        tabela.resize(TABLE_SIZE, nullptr);
     }
 
     // addText
@@ -126,7 +128,7 @@ public:
 
     // printTable
     void printTable() {
-        for (int i = 0; i < tamanho; i++) {
+        for (int i = 0; i < TABLE_SIZE; i++) {
             cout << "Índice " << i << ": ";
             Node* atual = tabela[i];
             while (atual != nullptr) {
@@ -140,7 +142,7 @@ public:
 
 // CLI pra utilizar o sistema
 void cli() {
-    HashTable tabela(10);  
+    HashTable tabela;  
     string comando;
 
     while (true) {
@@ -199,3 +201,5 @@ int main() {
     cli();
     return 0;
 }
+
+
