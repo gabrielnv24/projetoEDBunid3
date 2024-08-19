@@ -1,0 +1,15 @@
+
+    Para mim a palavra apple, por exemplo, resulta em índice 30, diferente do teste que o senhor falou no pdf, estou seguindo a lógica dessa descrição do pdf:
+    
+    A função hash converte uma string representando uma palavra em um índice para a tabela de dispersão. A função utiliza a soma dos valores ASCII dos caracteres da string e aplica um módulo com o tamanho da tabela para garantir que o índice esteja dentro dos limites:
+    
+    Valores ASCII dos caracteres:
+    'a': 97
+    'p': 112
+    'p': 112
+    'l': 108
+    'e': 101
+    Soma dos valores ASCII:
+    97+112+112+108+101=530
+    Aplicando o módulo com o tamanho da tabela (100):
+    530%100=30
